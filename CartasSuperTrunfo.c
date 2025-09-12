@@ -7,6 +7,16 @@
 // Siga os comentários para implementar cada parte do desafio.
 //Teste larissa
 
+float calcularDensidadePopulacional(int populacao, float area) {
+    float densidade = populacao / area;
+    return densidade;
+}
+
+float calcularPIBcapita(float pib, int populacao) {
+    float pib_capita = (pib * 1000000000) / populacao;
+    return pib_capita;
+}
+
 int main() {
     // Sugestão: Defina variáveis separadas para cada atributo da cidade.
     // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
@@ -26,7 +36,7 @@ int main() {
     int populacao2,pontos_turisticos2;
     float area2, pib2;
 
-    printf("\nAtenção: Por favor não use caracteres acentuados nem o ç, atualmente nao funciona\n");
+    printf("\n(Atenção: Por favor não use caracteres acentuados nem o ç, atualmente não funciona)\n");
 
     printf("\nCarta 1:\n");
     printf("Digite o nome do Estado da Carta 1: ");
@@ -41,7 +51,7 @@ int main() {
     scanf(" %d", &populacao1);
     printf("Digite o valor da Área da Carta 1: ");
     scanf(" %f", &area1);
-    printf("Digite o valor do PIB da Carta 1: ");
+    printf("Digite o valor do PIB da Carta 1(em bilhões): ");
     scanf(" %f", &pib1);
     printf("Digite o Número de Pontos Turísticos da Carta 1: ");
     scanf(" %d", &pontos_turisticos1);
@@ -59,7 +69,7 @@ int main() {
     scanf(" %d", &populacao2);
     printf("Digite o valor da Área da Carta 2: ");
     scanf(" %f", &area2);
-    printf("Digite o valor do PIB da Carta 2: ");
+    printf("Digite o valor do PIB da Carta 2(em bilhões): ");
     scanf(" %f", &pib2);
     printf("Digite o Número de Pontos Turísticos da Carta 2: ");
     scanf(" %d", &pontos_turisticos2);
@@ -72,6 +82,8 @@ int main() {
     printf("\nÁrea: %.2f km²", area1);
     printf("\nPIB: %.2f bilhões de reais", pib1);
     printf("\nNúmero de Pontos Turísticos: %d", pontos_turisticos1);
+    printf("\nDensidade Populacional: %.2f hab/km²", calcularDensidadePopulacional(populacao1, area1));
+    printf("\nPIB per Capita: %.2f reais", calcularPIBcapita(pib1, populacao1));
 
     printf("\n\nCarta 2:");
     printf("\nEstado: %c", estado2);
@@ -81,6 +93,8 @@ int main() {
     printf("\nÁrea: %.2f km²", area2);
     printf("\nPIB: %.2f bilhões de reais", pib2);
     printf("\nNúmero de Pontos Turísticos: %d", pontos_turisticos2);
+    printf("\nDensidade Populacional: %.2f hab/km²", calcularDensidadePopulacional(populacao2, area2));
+    printf("\nPIB per Capita: %.2f reais", calcularPIBcapita(pib2, populacao2));
 
     return 0;
 }
