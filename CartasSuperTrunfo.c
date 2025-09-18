@@ -21,7 +21,7 @@ float calcularSuperPoder(int populacao, float area, float pib, int pontos_turist
                          float pibCapita, float densidadePopulacional){
     float super_poder = populacao + area + pib + pontos_turisticos + pibCapita - densidadePopulacional;
     return super_poder;
-    }
+}
 
 int main() {
     // Sugestão: Defina variáveis separadas para cada atributo da cidade.
@@ -56,14 +56,14 @@ int main() {
     5 - PIB per Capita
     6 - Super Poder
     */
-    int comparar;
+    int comparar1, comparar2;
 
-    char comparar_texto[50]; // texto que vai ser usado para imprimir no terminal
-    float valor_comparavel1, valor_comparavel2;
-    int tipo_int = 0;
+    char comparar_texto1[50], comparar_texto2[50]; // texto que vai ser usado para imprimir no terminal
+    float comparar1_valor1, comparar1_valor2, comparar2_valor1, comparar2_valor2, resultado1, resultado2; // float trocado para long double por questão de precisão
+    int tipo_int1 = 0, tipo_int2 = 0;
 
     // truque para ajustar a comparação quando for a densidade populacional
-    int comparar_densidade = 0; 
+    int comparar_densidade1 = 0, comparar_densidade2 = 0; 
     char cidade_temp[50]; 
 
     printf("\n(Atenção: Por favor não use caracteres acentuados nem o ç, atualmente não funciona)\n");
@@ -113,16 +113,155 @@ int main() {
     superPoder2 = calcularSuperPoder(populacao2, area2, pib2, pontos_turisticos2, pibCapita2, densidadePopulacional2);
 
     printf("\nEscolha um atributo para comparação:"
-            "\n0 - População"
-            "\n1 - Área"
-            "\n2 - PIB"
-            "\n3 - Pontos Turísticos"
-            "\n4 - Densidade Populacional"
-            "\n5 - PIB per Capita"
-            "\n6 - Super Poder"
+            "\n1 - População"
+            "\n2 - Área"
+            "\n3 - PIB"
+            "\n4 - Pontos Turísticos"
+            "\n5 - Densidade Populacional"
+            "\n6 - PIB per Capita"
+            "\n7 - Super Poder"
             "\n\nEscolha: "
         );
-    scanf(" %d", &comparar);
+    scanf(" %d", &comparar1);
+
+    switch (comparar1)
+    {
+    case 1:
+        comparar1_valor1 = populacao1;
+        comparar1_valor2 = populacao2;
+        tipo_int1 = 1;
+        strcpy(comparar_texto1, "População");
+        break;
+    
+    case 2:
+        comparar1_valor1 = area1;
+        comparar1_valor2 = area2;
+        strcpy(comparar_texto1, "Área");
+        break;
+    
+    case 3:
+        comparar1_valor1 = pib1;
+        comparar1_valor2 = pib2;
+        strcpy(comparar_texto1, "PIB");
+        break;
+    
+    case 4:
+        comparar1_valor1 = pontos_turisticos1;
+        comparar1_valor2 = pontos_turisticos2;
+        tipo_int1 = 1;
+        strcpy(comparar_texto1, "Número de Pontos Turísticos");
+        break;
+
+    case 5:
+        comparar1_valor1 = densidadePopulacional1;
+        comparar1_valor2 = densidadePopulacional2;
+        comparar_densidade1 = 1;
+        strcpy(comparar_texto1, "Densidade Populacional");
+        break;
+    
+    case 6:
+        comparar1_valor1 = pibCapita1;
+        comparar1_valor2 = pibCapita2;
+        strcpy(comparar_texto1, "PIB per Capita");
+        break;
+    
+    case 7:
+        comparar1_valor1 =  superPoder1;
+        comparar1_valor2 =  superPoder2;
+        strcpy(comparar_texto1, "Super Poder");
+        break;
+    
+    default:
+        printf("Opção Inválida!");
+        return 1;
+        break;
+    }
+
+    printf("\nEscolha um segundo atributo para comparação:"
+            "\n1 - %s"
+            "\n2 - %s"
+            "\n3 - %s"
+            "\n4 - %s"
+            "\n5 - %s"
+            "\n6 - %s"
+            "\n\nEscolha: ",
+            (comparar1 - 1 > 0 ? "População" : "Área"),
+            (comparar1 - 2 > 0 ? "Área" : "PIB"),
+            (comparar1 - 3 > 0 ? "PIB" : "Pontos Turísticos"),
+            (comparar1 - 4 > 0 ? "Pontos Turísticos" : "Densidade Populacional"),
+            (comparar1 - 5 > 0 ? "Densidade Populacional" : "PIB per Capita"),
+            (comparar1 - 6 > 0 ? "PIB per Capita" : "Super Poder")
+        );
+    scanf(" %d", &comparar2);
+
+    // correção para o switch
+    if (comparar2 >= comparar1){
+        comparar2++;
+    }
+
+    switch (comparar2)
+    {
+    case 1:
+        comparar2_valor1 = populacao1;
+        comparar2_valor2 = populacao2;
+        tipo_int2 = 1;
+        strcpy(comparar_texto2, "População");
+        break;
+    
+    case 2:
+        comparar2_valor1 = area1;
+        comparar2_valor2 = area2;
+        strcpy(comparar_texto2, "Área");
+        break;
+    
+    case 3:
+        comparar2_valor1 = pib1;
+        comparar2_valor2 = pib2;
+        strcpy(comparar_texto2, "PIB");
+        break;
+    
+    case 4:
+        comparar2_valor1 = pontos_turisticos1;
+        comparar2_valor2 = pontos_turisticos2;
+        tipo_int2 = 1;
+        strcpy(comparar_texto2, "Número de Pontos Turísticos");
+        break;
+
+    case 5:
+        comparar2_valor1 = densidadePopulacional1;
+        comparar2_valor2 = densidadePopulacional2;
+        comparar_densidade2 = 1;
+        strcpy(comparar_texto2, "Densidade Populacional");
+        break;
+    
+    case 6:
+        comparar2_valor1 = pibCapita1;
+        comparar2_valor2 = pibCapita2;
+        strcpy(comparar_texto2, "PIB per Capita");
+        break;
+
+    case 7:
+        comparar1_valor1 =  superPoder1;
+        comparar1_valor2 =  superPoder2;
+        strcpy(comparar_texto1, "Super Poder");
+        break;
+    
+    default:
+        printf("Opção Inválida!");
+        return 1;
+        break;
+    }
+
+    if (comparar_densidade1){
+        resultado1 = comparar2_valor1 - comparar1_valor1;
+        resultado2 = comparar2_valor2 - comparar1_valor2;
+    } else if (comparar_densidade2){
+        resultado1 = comparar1_valor1 - comparar2_valor1;
+        resultado2 = comparar1_valor2 - comparar2_valor2;
+    } else {
+        resultado1 = comparar1_valor1 + comparar2_valor1;
+        resultado2 = comparar1_valor2 + comparar2_valor2;
+    }
 
     printf("\nCarta 1:");
     printf("\nEstado: %c", estado1);
@@ -146,76 +285,50 @@ int main() {
     printf("\nDensidade Populacional: %.2f hab/km²", densidadePopulacional2);
     printf("\nPIB per Capita: %.2f reais", pibCapita2);
 
-    switch (comparar)
-    {
-    case 0:
-        valor_comparavel1 = populacao1;
-        valor_comparavel2 = populacao2;
-        tipo_int = 1;
-        strcpy(comparar_texto, "População");
-        break;
-    
-    case 1:
-        valor_comparavel1 = area1;
-        valor_comparavel2 = area2;
-        strcpy(comparar_texto, "Área");
-        break;
-    
-    case 2:
-        valor_comparavel1 = pib1;
-        valor_comparavel2 = pib2;
-        strcpy(comparar_texto, "PIB");
-        break;
-    
-    case 3:
-        valor_comparavel1 = pontos_turisticos1;
-        valor_comparavel2 = pontos_turisticos2;
-        tipo_int = 1;
-        strcpy(comparar_texto, "Número de Pontos Turísticos");
-        break;
+    printf("\n\nComparação de cartas (Atributo: %s):", comparar_texto1);
 
-    case 4:
-        valor_comparavel1 = densidadePopulacional1;
-        valor_comparavel2 = densidadePopulacional2;
-        comparar_densidade = 1;
-        strcpy(comparar_texto, "Densidade Populacional");
-        // Ajuste para a exibição
-        strcpy(cidade_temp, cidade1);
-        strcpy(cidade1, cidade2);
-        strcpy(cidade2, cidade_temp);
-        break;
-    
-    case 5:
-        valor_comparavel1 = pibCapita1;
-        valor_comparavel2 = pibCapita2;
-        strcpy(comparar_texto, "PIB per Capita");
-        break;
-    
-    case 6:
-        valor_comparavel1 =  superPoder1;
-        valor_comparavel2 =  superPoder2;
-        strcpy(comparar_texto, "Super Poder");
-        break;
-    
-    default:
-        printf("Opção Inválida!");
-        break;
-    }
-
-    printf("\n\nComparação de cartas (Atributo: %s):", comparar_texto);
-
-    if (tipo_int) {
-        printf("\nCarta 1 - %s (%c): %.0f", cidade1, estado1, valor_comparavel1);
-        printf("\nCarta 2 - %s (%c): %.0f", cidade2, estado2, valor_comparavel2);
+    if (tipo_int1) {
+        printf("\nCarta 1 - %s (%c): %.0f", cidade1, estado1, comparar1_valor1);
+        printf("\nCarta 2 - %s (%c): %.0f", cidade2, estado2, comparar1_valor2);
     } else {
-        printf("\nCarta 1 - %s (%c): %.2f", cidade1, estado1, valor_comparavel1);
-        printf("\nCarta 2 - %s (%c): %.2f", cidade2, estado2, valor_comparavel2);
+        printf("\nCarta 1 - %s (%c): %.2f", cidade1, estado1, comparar1_valor1);
+        printf("\nCarta 2 - %s (%c): %.2f", cidade2, estado2, comparar1_valor2);
     }
 
-    if (valor_comparavel1 > valor_comparavel2) {
-        printf("\nResultado: Carta %d (%s) venceu!", 1 + comparar_densidade, cidade1);
-    } else if (valor_comparavel1 < valor_comparavel2) {
-        printf("\nResultado: Carta %d (%s) venceu!", 2 - comparar_densidade, cidade2);
+    if (comparar1_valor1 > comparar1_valor2) {
+        printf("\nResultado: Carta %d (%s) venceu!", 1 + comparar_densidade1, comparar_densidade1 ? cidade2 : cidade1);
+    } else if (comparar1_valor1 < comparar1_valor2) {
+        printf("\nResultado: Carta %d (%s) venceu!", 2 - comparar_densidade1, comparar_densidade1 ? cidade1 : cidade2);
+    } else {
+        printf("\nEmpate!");
+    }
+
+    printf("\n\nComparação de cartas (Atributo: %s):", comparar_texto2);
+
+    if (tipo_int2) {
+        printf("\nCarta 1 - %s (%c): %.0f", cidade1, estado1, comparar2_valor1);
+        printf("\nCarta 2 - %s (%c): %.0f", cidade2, estado2, comparar2_valor2);
+    } else {
+        printf("\nCarta 1 - %s (%c): %.2f", cidade1, estado1, comparar2_valor1);
+        printf("\nCarta 2 - %s (%c): %.2f", cidade2, estado2, comparar2_valor2);
+    }
+
+    if (comparar2_valor1 > comparar2_valor2) {
+        printf("\nResultado: Carta %d (%s) venceu!", 1 + comparar_densidade2, cidade1);
+    } else if (comparar2_valor1 < comparar2_valor2) {
+        printf("\nResultado: Carta %d (%s) venceu!", 2 - comparar_densidade2, cidade2);
+    } else {
+        printf("\nEmpate!");
+    }
+
+    printf("\n\nResultado final baseado na soma dos atributos:");
+    printf("\nSoma dos atributos comparados da carta 1: %.2f", resultado1);
+    printf("\nSoma dos atributos comparados da carta 2: %.2f", resultado2);
+
+    if (resultado1 > resultado2) {
+        printf("\nResultado: Carta 1 (%s) venceu!", cidade1);
+    } else if (resultado1 < resultado2) {
+        printf("\nResultado: Carta 2 (%s) venceu!", cidade2);
     } else {
         printf("\nEmpate!");
     }
