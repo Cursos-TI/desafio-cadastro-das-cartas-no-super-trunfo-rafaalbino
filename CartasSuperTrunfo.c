@@ -56,7 +56,7 @@ int main() {
     5 - PIB per Capita
     6 - Super Poder
     */
-    int comparar = 4;
+    int comparar;
 
     char comparar_texto[50]; // texto que vai ser usado para imprimir no terminal
     float valor_comparavel1, valor_comparavel2;
@@ -73,7 +73,7 @@ int main() {
     scanf(" %c", &estado1);
     printf("Digite o código da carta 1: ");
     scanf(" %s", &codigo1);
-    getchar(); //consumir \n para nao atrapalhar o fgets ja que tava dando problema
+    getchar(); // Consumir \n do buffer para não atrapalhar o fgets já que estava dando problema
     printf("Digite o nome da cidade da carta 1: ");
     fgets(cidade1, 50, stdin);
     cidade1[strcspn(cidade1, "\n")] = 0;
@@ -91,7 +91,7 @@ int main() {
     scanf(" %c", &estado2);
     printf("Digite o código da carta 2: ");
     scanf(" %s", &codigo2);
-    getchar(); //consumir \n para nao atrapalhar o fgets ja que tava dando problema
+    getchar(); // Consumir \n do buffer para não atrapalhar o fgets já que estava dando problema
     printf("Digite o nome da cidade da carta 2: ");
     fgets(cidade2, 50, stdin);
     cidade2[strcspn(cidade2, "\n")] = 0;
@@ -111,6 +111,18 @@ int main() {
     densidadePopulacional2 = calcularDensidadePopulacional(populacao2, area2);
     pibCapita2 = calcularPIBcapita(pib2, populacao2);
     superPoder2 = calcularSuperPoder(populacao2, area2, pib2, pontos_turisticos2, pibCapita2, densidadePopulacional2);
+
+    printf("\nEscolha um atributo para comparação:"
+            "\n0 - População"
+            "\n1 - Área"
+            "\n2 - PIB"
+            "\n3 - Pontos Turísticos"
+            "\n4 - Densidade Populacional"
+            "\n5 - PIB per Capita"
+            "\n6 - Super Poder"
+            "\n\nEscolha: "
+        );
+    scanf(" %d", &comparar);
 
     printf("\nCarta 1:");
     printf("\nEstado: %c", estado1);
@@ -134,49 +146,60 @@ int main() {
     printf("\nDensidade Populacional: %.2f hab/km²", densidadePopulacional2);
     printf("\nPIB per Capita: %.2f reais", pibCapita2);
 
-    if (comparar == 0) {
+    switch (comparar)
+    {
+    case 0:
         valor_comparavel1 = populacao1;
         valor_comparavel2 = populacao2;
         tipo_int = 1;
         strcpy(comparar_texto, "População");
-    }
-
-    if (comparar == 1) {
+        break;
+    
+    case 1:
         valor_comparavel1 = area1;
         valor_comparavel2 = area2;
         strcpy(comparar_texto, "Área");
-    }
-
-    if (comparar == 2) {
+        break;
+    
+    case 2:
         valor_comparavel1 = pib1;
         valor_comparavel2 = pib2;
         strcpy(comparar_texto, "PIB");
-    }
-
-    if (comparar == 3) {
+        break;
+    
+    case 3:
         valor_comparavel1 = pontos_turisticos1;
         valor_comparavel2 = pontos_turisticos2;
         tipo_int = 1;
         strcpy(comparar_texto, "Número de Pontos Turísticos");
-    }
+        break;
 
-    if (comparar == 4) {
+    case 4:
         valor_comparavel1 = densidadePopulacional1;
         valor_comparavel2 = densidadePopulacional2;
         comparar_densidade = 1;
         strcpy(comparar_texto, "Densidade Populacional");
-    }
-
-    if (comparar == 5) {
+        // Ajuste para a exibição
+        strcpy(cidade_temp, cidade1);
+        strcpy(cidade1, cidade2);
+        strcpy(cidade2, cidade_temp);
+        break;
+    
+    case 5:
         valor_comparavel1 = pibCapita1;
         valor_comparavel2 = pibCapita2;
         strcpy(comparar_texto, "PIB per Capita");
-    }
-
-    if (comparar == 6) {
+        break;
+    
+    case 6:
         valor_comparavel1 =  superPoder1;
         valor_comparavel2 =  superPoder2;
         strcpy(comparar_texto, "Super Poder");
+        break;
+    
+    default:
+        printf("Opção Inválida!");
+        break;
     }
 
     printf("\n\nComparação de cartas (Atributo: %s):", comparar_texto);
@@ -189,16 +212,12 @@ int main() {
         printf("\nCarta 2 - %s (%c): %.2f", cidade2, estado2, valor_comparavel2);
     }
 
-    if (comparar == 4) {
-        strcpy(cidade_temp, cidade1);
-        strcpy(cidade1, cidade2);
-        strcpy(cidade2, cidade_temp);
-    }
-
     if (valor_comparavel1 > valor_comparavel2) {
         printf("\nResultado: Carta %d (%s) venceu!", 1 + comparar_densidade, cidade1);
-    } else {
+    } else if (valor_comparavel1 < valor_comparavel2) {
         printf("\nResultado: Carta %d (%s) venceu!", 2 - comparar_densidade, cidade2);
+    } else {
+        printf("\nEmpate!");
     }
 
     return 0;
